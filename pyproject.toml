@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "regex-accountant-config"
+version = "0.1.0"
+description = "Personal config for regex-accountant"
+authors = ["Radian LLC <contact+regex-accountant-config@radian.codes>"]
+packages = [{include = "regex_accountant_config"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+mintotp = "^0.3.0"
+plaid-python = "^15.0.0"
+pycryptodomex = "^3.18.0"
+cryptography = "^41.0.3"
+html2text = "^2024.2.26"
+
+[tool.poetry.group.local.dependencies]
+regex-accountant = {path = "./symlink-to-regex-accountant", develop = true}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

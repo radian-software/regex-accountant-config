@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Plaid Link</title>
+  </head>
+  <body>
+    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+    <script>
+      "use strict";
+
+      Plaid.create({
+        token: "{{ link_token }}",
+        onSuccess: (public_token) => {
+          console.log("public token:", public_token);
+          fetch("/api/v0/success", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              public_token,
+            }),
+          }).then((resp) => {
+            if (resp.ok) {
+              window.close();
+            }
+          });
+        },
+      }).open();
+    </script>
+  </body>
+</html>
