@@ -241,4 +241,13 @@ class Fetcher(api.Fetcher):
 
                     pdb.set_trace()
                 raise
-        return sorted(txns, key=lambda txn: (txn.date_posted, txn.account_id))
+        # Necessary to enforce a stable sort since Vanguard rearranges
+        # transactions sometimes and that wreaks havoc in reliable
+        # auditing. Necessary also to filter strictly to the request
+        # timerange because this module merges multiple different
+        # Vanguard datasources into a single transaction history but
+        # the different datasources have different retention periods,
+        # so you can get inaccurate parts of the time range.
+        txns.sort(key=lambda txn: (txn.date_posted, txn.account_id, txn.source_uid))
+        txns = [txn for txn in txns if start_date <= txn.date_posted <= end_date]
+        return txns
