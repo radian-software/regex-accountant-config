@@ -8,10 +8,10 @@ packages = [{include = "regex_accountant_config"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 mintotp = "^0.3.0"
-plaid-python = "^15.0.0"
-pycryptodomex = "^3.18.0"
-cryptography = "^41.0.3"
-html2text = "^2024.2.26"
+plaid-python = "^39.2.0"
+pycryptodomex = "^3.23.0"
+cryptography = "^48.0.0"
+html2text = "^2025.4.15"
 
 [tool.poetry.group.local.dependencies]
 regex-accountant = {path = "./symlink-to-regex-accountant", develop = true}
