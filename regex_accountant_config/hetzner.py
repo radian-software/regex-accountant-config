@@ -224,7 +224,7 @@ class Fetcher(api.Fetcher):
                                 ),
                                 "failed to parse project name",
                             ).group(1)
-                            for idx, line_item in enumerate(soup.find_all("tr")):
+                            for idx, line_item in enumerate(section.find_all("tr")):
                                 if line_item.find("th"):
                                     continue
                                 cells = line_item.find_all("td")
